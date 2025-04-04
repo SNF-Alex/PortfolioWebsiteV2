@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Pace | Web Developer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script async src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;500;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link rel="preload" as="script" href="js/preload.js">
+    <script src="js/preload.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <!-- Three.js Background Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Cyber Interface Overlay -->
+    <div class="terminal-overlay" aria-hidden="true"></div>
+
+    <!-- Floating UI Elements -->
+    <div class="floating-element" data-type="circle" data-speed="0.8"></div>
+    <div class="floating-element" data-type="triangle" data-speed="1.2"></div>
+    <div class="floating-element" data-type="square" data-speed="1"></div>
+
+    <!-- Main Content Container -->
+    <main class="content-container">
+        <!-- Hero Section -->
+        <section class="hero section-padding">
+            <div class="gradient-text-animation">
+                <h1 class="hero-title">
+                    <span data-text="Alexander">Alexander</span>
+                    <span data-text="Pace">Pace</span>
+                </h1>
+            </div>
+            <div class="location-display">
+                <span class="neon-accent">//</span> Largo, FL
+            </div>
+        </section>
+
+        <!-- Skills Matrix -->
+    <section class="skills section-padding" id="skills">
+        <h2 class="section-title animate-scroll">Technical Arsenal</h2>
+        <div class="skills-grid">
+            <!-- Top Row - 3 Cards -->
+            <div class="skill-card" data-skill="html">
+                <div class="card-front">
+                    <div class="skill-icon">HTML</div>
+                    <h3 class="skill-name">HTML5</h3>
+                </div>
+                <div class="card-back">
+                    <p class="skill-desc">Semantic Markup</p>
+                    <div class="skill-progress" style="--skill-level: 95%"></div>
+                    <br>
+                    <p>- 3+ Years Experience</p>
+                    <p>- Very Comfortable</p>
+                    <p>(Best Skill/Most Used)</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-skill="css">
+                <div class="card-front">
+                    <div class="skill-icon">CSS</div>
+                    <h3 class="skill-name">CSS</h3>
+                </div>
+                <div class="card-back">
+                    <p class="skill-desc">Modern Layouts</p>
+                    <div class="skill-progress" style="--skill-level: 95%"></div>
+                    <br>
+                    <p>- 3+ Years Experience</p>
+                    <p>- Very Comfortable</p>
+                    <p>(Best Skill/Most Used)</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-skill="javascript">
+                <div class="card-front">
+                    <div class="skill-icon">JS</div>
+                    <h3 class="skill-name">JavaScript</h3>
+                </div>
+                <div class="card-back">
+                    <p class="skill-desc">ES6+ Expertise</p>
+                    <div class="skill-progress" style="--skill-level: 80%"></div>
+                    <br>
+                    <p>- 2+ Years of Experience</p>
+                    <p>- Comfortable</p>
+                </div>
+            </div>
+
+            <!-- Bottom Row - 2 Centered Cards -->
+            <div class="skill-card" data-skill="python">
+                <div class="card-front">
+                    <div class="skill-icon">PY</div>
+                    <h3 class="skill-name">Python</h3>
+                </div>
+                <div class="card-back">
+                    <p class="skill-desc">Django & Flask</p>
+                    <div class="skill-progress" style="--skill-level: 65%"></div>
+                    <br>
+                    <p>- 1+ Year Experience</p>
+                    <p>- Learning More</p>
+                    <p>(Comfortable)</p>
+                </div>
+            </div>
+
+            <div class="skill-card" data-skill="react">
+                <div class="card-front">
+                    <div class="skill-icon">⚛</div>
+                    <h3 class="skill-name">React</h3>
+                </div>
+                <div class="card-back">
+                    <p class="skill-desc">Hooks & Context API</p>
+                    <div class="skill-progress" style="--skill-level: 50%"></div>
+                    <br>
+                    <p>- 1 Year Experience</p>
+                    <p>(Learning More)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Certificates Section -->
+        <section class="certificates section-padding" id="certificates">
+            <h2 class="section-title animate-scroll">Credentials</h2>
+            <div class="cert-card animate-scroll">
+                <h3 class="cert-title">Web Development Certificate</h3>
+                <p class="cert-issuer">Certiciate with <a href="https://www.spcollege.edu/">St. Petersburg College</a></p>
+                <div class="cert-date">2023</div>
+            </div>
+        </section>
+
+        <section class="contact section-padding" id="contact">
+            <div class="contact-cta animate-scroll">
+                <h2 class="cta-title">Initiate Connection</h2>
+                <form id="contactForm" class="cyber-form">
+                    <div class="input-group">
+                        <input type="email" id="emailInput" class="cyber-input" required>
+                        <label class="cyber-label">Your Email</label>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="messageInput" class="cyber-input" rows="4" required></textarea>
+                        <label class="cyber-label">Encoded Message</label>
+                        <div class="error-message" id="messageError"></div>
+                    </div>
+                    <div class="g-recaptcha" 
+                         data-sitekey="YOUR_RECAPTCHA_SITE_KEY" 
+                         data-callback="enableSubmit">
+                    </div>
+                    <button class="neon-button" type="submit" id="submitBtn" disabled>
+                        <span class="button-glow"></span>
+                        <span class="button-text">Transmit Secure</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cyberpunk Decoration Lines -->
+    <div class="cyber-line vertical" style="left: 20%"></div>
+    <div class="cyber-line vertical" style="left: 80%"></div>
+    <div class="cyber-line horizontal" style="top: 40%"></div>
+
+    <!-- Scripts -->
+    <script src="js/three-config.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
