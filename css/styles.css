@@ -428,14 +428,21 @@ body[data-terminal] .terminal-overlay {
   color: var(--text-secondary);
   pointer-events: none;
   transition: all 0.3s ease;
+  transform-origin: left center; /* Add this */
 }
 
 .cyber-input:focus ~ .cyber-label,
-.cyber-input:valid ~ .cyber-label {
+.cyber-input:not(:placeholder-shown) ~ .cyber-label {
   top: -1.5rem;
   left: 0;
   font-size: 0.8rem;
   color: var(--neon-accent);
+  transform: scale(0.85); /* Add scaling */
+}
+
+.cyber-input::placeholder {
+  opacity: 0;
+  color: transparent;
 }
 
 .error-message {

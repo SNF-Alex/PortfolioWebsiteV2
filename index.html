@@ -12,6 +12,7 @@
     <link rel="preload" as="script" href="js/preload.js">
     <script src="js/preload.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="iconified/favicon.ico" />
 </head>
 <body>
     <!-- Three.js Background Canvas -->
@@ -36,7 +37,7 @@
                 </h1>
             </div>
             <div class="location-display">
-                <span class="neon-accent">//</span> Largo, FL
+                <span class="neon-accent">//</span> Pinellas County, FL
             </div>
         </section>
 
@@ -136,15 +137,28 @@
                 <h2 class="cta-title">Initiate Connection</h2>
                 <form id="contactForm" class="cyber-form">
                     <div class="input-group">
-                        <input type="email" id="emailInput" class="cyber-input" required>
+                        <input 
+                          type="email" 
+                          id="emailInput" 
+                          class="cyber-input" 
+                          required
+                          placeholder=" "
+                        >
                         <label class="cyber-label">Your Email</label>
                         <div class="error-message" id="emailError"></div>
-                    </div>
-                    <div class="input-group">
-                        <textarea id="messageInput" class="cyber-input" rows="4" required></textarea>
+                      </div>
+                      
+                      <div class="input-group">
+                        <textarea 
+                          id="messageInput" 
+                          class="cyber-input" 
+                          rows="4" 
+                          required
+                          placeholder=" "
+                        ></textarea>
                         <label class="cyber-label">Encoded Message</label>
                         <div class="error-message" id="messageError"></div>
-                    </div>
+                      </div>
                     <button class="cyber-button" type="submit" id="submitBtn">
                         <span class="cyber-text">INITIATE TRANSMISSION</span>
                         <span class="glitch-layer"></span>
