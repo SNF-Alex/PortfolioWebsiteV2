@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Email validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+  // Initialize EmailJS first!
+  emailjs.init('7yRLxdXAf0ljLXatW'); // Move initialization outside form handler
+
   // Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -39,74 +42,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Terminal Effect
   const commands = ['> INITIATE CONTACT_SEQUENCE', '> OPEN COMM_CHANNEL', '> START TRANSMISSION'];
-  const neonButton = document.querySelector('.neon-button');
-  neonButton.addEventListener('mouseenter', () => {
+  const cyberButton = document.querySelector('.cyber-button');
+  cyberButton.addEventListener('mouseenter', () => {
     document.body.setAttribute('data-terminal', commands[Math.floor(Math.random()*commands.length)]);
     setTimeout(() => document.body.removeAttribute('data-terminal'), 2000);
   });
 
-  // Form Submission
+  // Form Submission (Updated)
   document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
     const email = document.getElementById('emailInput').value;
     const message = document.getElementById('messageInput').value;
-    const captcha = grecaptcha.getResponse();
 
+    // Reset errors
+    document.querySelectorAll('.error-message').forEach(el => {
+      el.style.display = 'none';
+    });
+
+    // Validation
     let isValid = true;
+    
     if (!emailRegex.test(email)) {
       document.getElementById('emailError').textContent = 'Invalid email protocol';
       document.getElementById('emailError').style.display = 'block';
       isValid = false;
-    } else {
-      document.getElementById('emailError').style.display = 'none';
     }
 
     if (message.length < 10) {
       document.getElementById('messageError').textContent = 'Message must be at least 10 characters';
       document.getElementById('messageError').style.display = 'block';
       isValid = false;
-    } else {
-      document.getElementById('messageError').style.display = 'none';
     }
 
-    if (!captcha) {
-      alert('Please verify you are not a robot');
-      isValid = false;
-    }
+    if (!isValid) return;
 
-    if (isValid) {
-      try {
-        emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
-        const response = await emailjs.send('service_81dmn1r', 'contact_form', {
+    try {
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.progress-bar').style.width = '100%';
+
+        
+        // Send email
+      const response = await emailjs.send(
+        'service_81dmn1r', // Service ID
+        'template_5qecreg', // Template ID
+        {
           from_name: email,
           from_email: email,
-          message: message
-        });
-        if (response.status === 200) {
-          alert('Transmission successful! Message received.');
-          document.getElementById('contactForm').reset();
-          grecaptcha.reset();
-          document.getElementById('submitBtn').disabled = true;
+          message: message,
+          to_email: 'aep2cool@gmail.com' // Add this line
         }
-      } catch (error) {
-        console.error('Transmission failed:', error);
-        alert('Message failed to send. Please try again.');
+      );
+
+      console.log('EmailJS Response:', response); // Debug logging
+
+      if (response.status === 200) {
+        submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ff88 100%)';
+        setTimeout(() => {
+          submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ffee 100%)';
+          document.getElementById('contactForm').reset();
+        }, 1500);
       }
+    } catch (error) {
+      console.error('Full Error:', error);
+      alert(`Failed to send: ${error.text || error.message}`);
+      submitBtn.style.background = 'linear-gradient(45deg, #ff0033 0%, #ff0066 100%)';
+      setTimeout(() => {
+        submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ffee 100%)';
+      }, 2000);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.progress-bar').style.width = '0%';
     }
   });
-
-  // Enable Submit
-  window.enableSubmit = () => {
-    document.getElementById('submitBtn').disabled = false;
-  };
 
   // Scroll Animations
   const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-scroll');
     elements.forEach(element => {
       const elementTop = element.getBoundingClientRect().top;
-      const elementBottom = element.getBoundingClientRect().bottom;
-      if(elementTop < window.innerHeight * 0.8 && elementBottom > 0) {
+      if(elementTop < window.innerHeight * 0.8) {
         element.style.opacity = '1';
         element.style.transform = 'translateY(0)';
       }

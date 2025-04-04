@@ -12,7 +12,6 @@
     <link rel="preload" as="script" href="js/preload.js">
     <script src="js/preload.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <!-- Three.js Background Canvas -->
@@ -131,6 +130,7 @@
             </div>
         </section>
 
+        <!-- Updated Contact Section -->
         <section class="contact section-padding" id="contact">
             <div class="contact-cta animate-scroll">
                 <h2 class="cta-title">Initiate Connection</h2>
@@ -145,13 +145,11 @@
                         <label class="cyber-label">Encoded Message</label>
                         <div class="error-message" id="messageError"></div>
                     </div>
-                    <div class="g-recaptcha" 
-                         data-sitekey="YOUR_RECAPTCHA_SITE_KEY" 
-                         data-callback="enableSubmit">
-                    </div>
-                    <button class="neon-button" type="submit" id="submitBtn" disabled>
-                        <span class="button-glow"></span>
-                        <span class="button-text">Transmit Secure</span>
+                    <button class="cyber-button" type="submit" id="submitBtn">
+                        <span class="cyber-text">INITIATE TRANSMISSION</span>
+                        <span class="glitch-layer"></span>
+                        <span class="scanline"></span>
+                        <div class="progress-bar"></div>
                     </button>
                 </form>
             </div>

@@ -143,28 +143,15 @@ body {
   grid-column: 1 / -1;
 }
 
-/* First row - 3 cards */
-.skill-card:nth-child(-n+3) {
-  grid-row: 1;
-}
-
-/* Second row - 2 centered cards */
-.skill-card:nth-child(4),
-.skill-card:nth-child(5) {
-  grid-row: 2;
-  grid-column: span 1;
-}
-
-/* Fix hover alignment */
 .skill-card {
   position: relative;
   height: 320px;
   perspective: 1000px;
   cursor: pointer;
   border-radius: 8px;
-  overflow: visible; /* Changed from hidden */
+  overflow: visible;
   transition: transform 0.4s ease;
-  margin-bottom: 20px; /* Add spacing for hover */
+  margin-bottom: 20px;
 }
 
 .skill-card:hover {
@@ -345,99 +332,69 @@ body[data-terminal] .terminal-overlay {
   margin: 4rem 0;
 }
 
-.neon-button {
+/* ===== Cyber Button Styles ===== */
+.cyber-button {
   position: relative;
-  padding: 1.2rem 2.5rem;
-  background: transparent;
-  border: 2px solid var(--neon-accent);
-  color: var(--neon-accent);
-  font-family: var(--font-heading);
+  padding: 1.5rem 3rem;
+  background: linear-gradient(45deg, #00ff88 0%, #00ffee 100%);
+  border: none;
+  color: #0a0a0f;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
-  overflow: hidden;
+  letter-spacing: 0.15em;
   cursor: pointer;
   margin-top: 2rem;
+  clip-path: polygon(15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
-.button-glow {
+.cyber-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 5px rgba(10,10,15,0.3);
+}
+
+.glitch-layer {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle,
-    rgba(0, 255, 136, 0.4) 0%,
-    transparent 70%
+  background: linear-gradient(45deg, 
+    rgba(255,0,136,0.3) 0%,
+    rgba(0,255,238,0.3) 50%,
+    rgba(255,0,136,0.3) 100%
   );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+  animation: glitch 2s infinite linear;
 }
 
-.neon-button:hover {
-  box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
-  transform: translateY(-2px);
-}
-
-.neon-button:hover .button-glow {
-  opacity: 0.6;
-}
-
-.button-ripple {
+.scanline {
   position: absolute;
-  background: rgba(0, 255, 136, 0.3);
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  animation: ripple 1s ease-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0,255,136,0.8);
+  box-shadow: 0 0 10px #00ff88;
+  animation: scan 2s infinite linear;
+  transform: translateY(-100%);
 }
 
-/* ===== Enhanced Decorative Elements ===== */
-.floating-element {
-  position: fixed;
-  pointer-events: none;
-  animation: float 6s ease-in-out infinite;
-  transform-style: preserve-3d;
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #ff0033;
+  width: 0%;
+  transition: width 0.3s ease;
 }
 
-.floating-element[data-type="circle"] {
-  width: 120px;
-  height: 120px;
-  border: 2px solid var(--neon-accent);
-  border-radius: 50%;
-  filter: blur(1px);
-  opacity: 0.1;
-}
-
-.floating-element[data-type="triangle"] {
-  width: 0;
-  height: 0;
-  border-left: 60px solid transparent;
-  border-right: 60px solid transparent;
-  border-bottom: 100px solid var(--neon-accent);
-  opacity: 0.05;
-}
-
-.floating-element[data-type="square"] {
-  width: 80px;
-  height: 80px;
-  background: var(--neon-accent);
-  opacity: 0.05;
-  filter: blur(2px);
-}
-
-.cyber-line {
-  position: fixed;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--neon-accent),
-    transparent
-  );
-  animation: lineGlow 4s linear infinite;
-}
-
-/* NEW FORM STYLES */
+/* ===== Form Styles ===== */
 .cyber-form {
   max-width: 600px;
   margin: 2rem auto;
@@ -488,28 +445,6 @@ body[data-terminal] .terminal-overlay {
   display: none;
 }
 
-.g-recaptcha {
-  margin: 1.5rem 0;
-  transform: scale(0.85);
-  transform-origin: 0 0;
-}
-
-@media (max-width: 768px) {
-  .g-recaptcha {
-    transform: scale(0.7);
-  }
-}
-
-.vertical {
-  width: 1px;
-  height: 100vh;
-}
-
-.horizontal {
-  height: 1px;
-  width: 100vw;
-}
-
 /* ===== Animations ===== */
 @keyframes gradientPulse {
   0% { background-position: 0% 50% }
@@ -528,25 +463,23 @@ body[data-terminal] .terminal-overlay {
   100% { opacity: 0.1 }
 }
 
-@keyframes ripple {
-  from {
-    transform: scale(0);
-    opacity: 1;
-  }
-  to {
-    transform: scale(10);
-    opacity: 0;
-  }
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%) }
+  100% { transform: translateY(300%) }
 }
 
 @keyframes locationGlow {
   0% { left: -100% }
   100% { left: 100% }
-}
-
-@keyframes scan {
-  0% { transform: translateY(-100%) }
-  100% { transform: translateY(100%) }
 }
 
 @keyframes gridScroll {
@@ -591,6 +524,11 @@ body[data-terminal] .terminal-overlay {
 
   .cert-card {
     padding: 1.5rem;
+  }
+
+  .cyber-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
   }
 }
 
