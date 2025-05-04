@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateTheme = (color) => {
     document.documentElement.setAttribute('data-theme', color);
     localStorage.setItem('selectedTheme', color);
+    
+    // Update particle system
+    if (window.updateParticleTheme) {
+      window.updateParticleTheme();
+    }
   };
 
   // Initialize theme from storage

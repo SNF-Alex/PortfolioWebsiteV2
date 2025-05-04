@@ -6,25 +6,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let scene, camera, renderer, particles;
   const canvas = document.getElementById('particleCanvas');
-  const themeColors = {
-    green: 0x00ff88,
-    red: 0xFF000D,
-    blue: 0x00f0ff,
-    pink: 0xff00ff
+  
+  // Get CSS color variables
+  const getThemeColor = () => {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--neon-accent').trim();
   };
 
-  function initParticles(theme = 'green') {
+  const getBgColor = () => {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--dark-bg').trim();
+  };
+
+  function initParticles() {
+    // Cleanup previous scene if exists
+    if (scene) {
+      scene.remove(particles);
+      particles.geometry.dispose();
+      particles.material.dispose();
+      renderer.dispose();
+    }
+
     scene = new THREE.Scene();
     
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
 
     renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       antialias: true,
-      alpha: true
+      alpha: false // Set to false to use background color
     });
-    renderer.setClearColor(0x000000, 0);
+    
+    // Set initial colors from CSS
+    renderer.setClearColor(new THREE.Color(getBgColor()));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -40,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const material = new THREE.PointsMaterial({
       size: 0.06,
-      color: new THREE.Color(themeColors[theme]),
+      color: new THREE.Color(getThemeColor()),
       transparent: true,
       opacity: 0.8,
       blending: THREE.AdditiveBlending,
@@ -72,22 +87,27 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.render(scene, camera);
   }
 
-  window.updateTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    particles.material.color.setHex(themeColors[theme]);
-    localStorage.setItem('selectedTheme', theme);
+  // Public update method
+  window.updateParticleTheme = () => {
+    try {
+      particles.material.color.set(new THREE.Color(getThemeColor()));
+      renderer.setClearColor(new THREE.Color(getBgColor()));
+      renderer.render(scene, camera);
+    } catch (error) {
+      console.error('Theme update error:', error);
+    }
   };
 
+  // Initialize with saved theme
   try {
-    const savedTheme = localStorage.getItem('selectedTheme') || 'green';
-    initParticles(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    initParticles();
     
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
     animate();
   } catch (error) {
     canvas.style.display = 'none';

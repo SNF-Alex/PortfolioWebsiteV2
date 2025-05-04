@@ -55,11 +55,25 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
-  height: 2px;
+  width: min(200%, 400vw);
+  height: clamp(2px, 0.2vw + 2px, 4px);
   background: var(--neon-accent);
-  box-shadow: 0 0 15px rgba(var(--neon-accent-rgb), 0.5);
+  box-shadow: 
+    0 0 calc(clamp(15px, 2vw, 25px)) rgba(var(--neon-accent-rgb), 0.7),
+    inset 0 0 10px rgba(var(--neon-accent-rgb), 0.3);
   z-index: 2;
+  opacity: 0.95;
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (max-width: 767px) {
+  .cyber-line.social-line {
+    width: min(120%, 200vw);
+    opacity: 0.85;
+    box-shadow: 
+      0 0 calc(clamp(10px, 1.5vw, 15px)) rgba(var(--neon-accent-rgb), 0.5),
+      inset 0 0 5px rgba(var(--neon-accent-rgb), 0.2);
+  }
 }
 
 @media (max-width: 480px) {
@@ -95,14 +109,15 @@ body {
 .hero::before {
   content: '';
   position: absolute;
+  top: -25%;
+  left: -25%;
   width: 150%;
   height: 150%;
   background-image: 
-    linear-gradient(var(--neon-accent) 1px, transparent 1px),
-    linear-gradient(90deg, var(--neon-accent) 1px, transparent 1px);
+        linear-gradient(currentColor 1px, transparent 1px),
+        linear-gradient(90deg, currentColor 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.03;
-  animation: gridScroll 20s linear infinite;
 }
 
 .gradient-text-animation {
@@ -368,6 +383,16 @@ body {
   overflow: hidden;
 }
 
+.cyber-button:hover {
+  transform: scale(1.05) translateZ(0);
+  box-shadow: 0 0 25px var(--neon-accent);
+}
+
+.cyber-button:active {
+  transform: scale(0.98);
+  transition-duration: 0.1s;
+}
+
 .cyber-text {
   position: relative;
   z-index: 2;
@@ -409,7 +434,7 @@ body {
   height: 3px;
   background: #ff0033;
   width: 0%;
-  transition: width 0.3s ease;
+  transition: width 1s ease;
 }
 
 /* ===== Form Styles ===== */
