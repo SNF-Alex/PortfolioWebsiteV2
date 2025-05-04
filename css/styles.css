@@ -1,6 +1,7 @@
 /* ===== Base Styles & Variables ===== */
 :root {
   --neon-accent: #00ff88;
+  --neon-accent-rgb: 0, 255, 136;
   --dark-bg: #0a0a0f;
   --semi-dark: rgba(15, 15, 25, 0.95);
   --text-primary: #e3e3e3;
@@ -36,7 +37,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
   width: 100%;
   height: 100%;
   filter: brightness(1.5) contrast(150%);
@@ -47,6 +48,18 @@ body {
   z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+/* ===== Cyber Lines ===== */
+.cyber-line.social-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250%;
+  height: 2px;
+  background: var(--neon-accent);
+  box-shadow: 0 0 15px rgba(var(--neon-accent-rgb), 0.5);
+  z-index: 2;
 }
 
 /* ===== Supercharged Hero Section ===== */
@@ -75,7 +88,12 @@ body {
 }
 
 .gradient-text-animation {
-  background: linear-gradient(45deg, #00ff88, #00ffff, #ff00ff);
+  background: linear-gradient(
+    45deg, 
+    var(--neon-accent),
+    color-mix(in srgb, var(--neon-accent) 70%, white),
+    color-mix(in srgb, var(--neon-accent) 70%, black)
+  );
   background-size: 300% 300%;
   animation: gradientPulse 8s ease infinite;
   -webkit-background-clip: text;
@@ -90,7 +108,7 @@ body {
   font-size: clamp(3rem, 8vw, 6rem);
   letter-spacing: -0.03em;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 15px rgba(var(--neon-accent-rgb), 0.3);
 }
 
 .location-display {
@@ -121,7 +139,7 @@ body {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0,255,136,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--neon-accent-rgb), 0.2), transparent);
   animation: locationGlow 3s infinite;
 }
 
@@ -152,6 +170,7 @@ body {
   overflow: visible;
   transition: transform 0.4s ease;
   margin-bottom: 20px;
+  border: 1px solid rgba(var(--neon-accent-rgb), 0.1);
 }
 
 .skill-card:hover {
@@ -165,7 +184,7 @@ body {
   height: 100%;
   backface-visibility: hidden;
   padding: 2rem;
-  border: 1px solid rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(var(--neon-accent-rgb), 0.1);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -180,8 +199,8 @@ body {
 
 .card-back {
   transform: rotateY(180deg);
-  background: linear-gradient(45deg, rgba(10,10,15,0.95), rgba(0,15,15,0.95));
-  box-shadow: 0 0 30px rgba(0,255,136,0.1);
+  background: var(--semi-dark);
+  box-shadow: 0 0 30px rgba(var(--neon-accent-rgb), 0.1);
 }
 
 .skill-card:hover .card-front {
@@ -196,13 +215,13 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(0, 255, 136, 0.1);
+  background: rgba(var(--neon-accent-rgb), 0.1);
   display: grid;
   place-items: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   border: 2px solid var(--neon-accent);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 20px rgba(var(--neon-accent-rgb), 0.2);
   transition: transform 0.3s ease;
 }
 
@@ -233,7 +252,7 @@ body {
 
 .cert-card {
   background: var(--semi-dark);
-  border: 1px solid rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(var(--neon-accent-rgb), 0.1);
   border-radius: 8px;
   padding: 2rem;
   margin: 2rem 0;
@@ -251,7 +270,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 255, 136, 0.1),
+    rgba(var(--neon-accent-rgb), 0.1),
     transparent
   );
   transition: 0.5s;
@@ -285,41 +304,22 @@ body {
   opacity: 0.7;
 }
 
-/* ===== Cyber Interface Overlay ===== */
-body::after {
-  content: '';
+/* ===== Terminal Overlay ===== */
+.terminal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  opacity: 0.05 !important;
+  pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent 50%,
-    rgba(0,255,136,0.02) 51%,
+    rgba(var(--neon-accent-rgb), 0.02) 51%,
     transparent 52%
   );
-  opacity: 0.1;
-  pointer-events: none;
-  animation: scan 4s linear infinite;
-}
-
-.terminal-overlay {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  color: var(--neon-accent);
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  text-shadow: 0 0 5px var(--neon-accent);
-}
-
-body[data-terminal] .terminal-overlay {
-  opacity: 0.7;
-  content: attr(data-terminal);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 /* ===== Contact CTA ===== */
@@ -336,7 +336,7 @@ body[data-terminal] .terminal-overlay {
 .cyber-button {
   position: relative;
   padding: 1.5rem 3rem;
-  background: linear-gradient(45deg, #00ff88 0%, #00ffee 100%);
+  background: linear-gradient(45deg, var(--neon-accent) 0%, var(--neon-accent) 100%);
   border: none;
   color: #0a0a0f;
   font-family: 'Orbitron', sans-serif;
@@ -364,10 +364,10 @@ body[data-terminal] .terminal-overlay {
   height: 100%;
   background: linear-gradient(45deg, 
     rgba(255,0,136,0.3) 0%,
-    rgba(0,255,238,0.3) 50%,
+    rgba(var(--neon-accent-rgb), 0.3) 50%,
     rgba(255,0,136,0.3) 100%
   );
-  opacity: 0;
+  opacity: 0.3;
   mix-blend-mode: screen;
   animation: glitch 2s infinite linear;
 }
@@ -378,8 +378,8 @@ body[data-terminal] .terminal-overlay {
   left: 0;
   width: 100%;
   height: 2px;
-  background: rgba(0,255,136,0.8);
-  box-shadow: 0 0 10px #00ff88;
+  background: rgba(var(--neon-accent-rgb), 0.8);
+  box-shadow: 0 0 10px var(--neon-accent);
   animation: scan 2s infinite linear;
   transform: translateY(-100%);
 }
@@ -408,8 +408,8 @@ body[data-terminal] .terminal-overlay {
 .cyber-input {
   width: 100%;
   padding: 1rem;
-  background: rgba(0, 255, 136, 0.05);
-  border: 1px solid rgba(0, 255, 136, 0.3);
+  background: rgba(var(--neon-accent-rgb), 0.05);
+  border: 1px solid rgba(var(--neon-accent-rgb), 0.3);
   color: var(--neon-accent);
   font-family: var(--font-body);
   transition: all 0.3s ease;
@@ -417,8 +417,8 @@ body[data-terminal] .terminal-overlay {
 
 .cyber-input:focus {
   outline: none;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-  background: rgba(0, 255, 136, 0.1);
+  box-shadow: 0 0 15px rgba(var(--neon-accent-rgb), 0.2);
+  background: rgba(var(--neon-accent-rgb), 0.1);
 }
 
 .cyber-label {
@@ -428,7 +428,7 @@ body[data-terminal] .terminal-overlay {
   color: var(--text-secondary);
   pointer-events: none;
   transition: all 0.3s ease;
-  transform-origin: left center; /* Add this */
+  transform-origin: left center;
 }
 
 .cyber-input:focus ~ .cyber-label,
@@ -437,7 +437,7 @@ body[data-terminal] .terminal-overlay {
   left: 0;
   font-size: 0.8rem;
   color: var(--neon-accent);
-  transform: scale(0.85); /* Add scaling */
+  transform: scale(0.85);
 }
 
 .cyber-input::placeholder {
@@ -457,17 +457,6 @@ body[data-terminal] .terminal-overlay {
   0% { background-position: 0% 50% }
   50% { background-position: 100% 50% }
   100% { background-position: 0% 50% }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-20px) }
-}
-
-@keyframes lineGlow {
-  0% { opacity: 0.1 }
-  50% { opacity: 0.3 }
-  100% { opacity: 0.1 }
 }
 
 @keyframes glitch {
@@ -500,6 +489,112 @@ body[data-terminal] .terminal-overlay {
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* ===== Color Themes ===== */
+[data-theme="green"] {
+  --neon-accent: #00ff88;
+  --neon-accent-rgb: 0, 255, 136;
+  --dark-bg: #0a0a0f;
+}
+
+[data-theme="red"] {
+  --neon-accent: #FF000D;
+  --neon-accent-rgb: 255, 0, 13;
+  --dark-bg: #0a0a0f;
+}
+
+[data-theme="blue"] {
+  --neon-accent: #00f0ff;
+  --neon-accent-rgb: 0, 240, 255;
+  --dark-bg: #0a0a0f;
+}
+
+[data-theme="pink"] {
+  --neon-accent: #ff00ff;
+  --neon-accent-rgb: 255, 0, 255;
+  --dark-bg: #0a0a0f;
+}
+
+/* ===== Social Links ===== */
+.social-links {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.cyber-social {
+  position: relative;
+  padding: 0.8rem 1.5rem;
+  background: rgba(var(--neon-accent-rgb), 0.1);
+  border: 2px solid var(--neon-accent);
+  color: var(--neon-accent);
+  font-family: var(--font-heading);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  clip-path: polygon(15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cyber-social:hover {
+  background: var(--neon-accent);
+  color: var(--dark-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--neon-accent);
+}
+
+.cyber-social i {
+  font-size: 1.2rem;
+}
+
+/* ===== Color Panel ===== */
+.color-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: grid;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.color-option {
+  padding: 0.5rem 1rem;
+  background: var(--dark-bg);
+  border: 2px solid var(--neon-accent);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
+}
+
+.color-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.color-option::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.color-option.active {
+  border-color: currentColor;
+  color: currentColor;
+  text-shadow: 0 0 10px currentColor;
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 1024px) {
   .skills-grid {
@@ -523,10 +618,6 @@ body[data-terminal] .terminal-overlay {
   .skill-card {
     grid-column: auto !important;
     grid-row: auto !important;
-  }
-
-  .floating-element {
-    display: none;
   }
 
   .cert-card {
@@ -557,9 +648,5 @@ body[data-terminal] .terminal-overlay {
 @media (hover: none) {
   .skill-card:hover {
     transform: none !important;
-  }
-  
-  .floating-element {
-    display: none !important;
   }
 }

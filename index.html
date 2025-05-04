@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="green">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,22 +13,13 @@
     <script src="js/preload.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="icon" type="image/x-icon" href="iconified/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Three.js Background Canvas -->
     <canvas id="particleCanvas"></canvas>
-
-    <!-- Cyber Interface Overlay -->
     <div class="terminal-overlay" aria-hidden="true"></div>
 
-    <!-- Floating UI Elements -->
-    <div class="floating-element" data-type="circle" data-speed="0.8"></div>
-    <div class="floating-element" data-type="triangle" data-speed="1.2"></div>
-    <div class="floating-element" data-type="square" data-speed="1"></div>
-
-    <!-- Main Content Container -->
     <main class="content-container">
-        <!-- Hero Section -->
         <section class="hero section-padding">
             <div class="gradient-text-animation">
                 <h1 class="hero-title">
@@ -39,99 +30,107 @@
             <div class="location-display">
                 <span class="neon-accent">//</span> Pinellas County, FL
             </div>
+            <div class="social-links">
+                <a href="https://github.com/SNF-Alex" class="cyber-social" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/alexander-pace-0648b6270/" class="cyber-social" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+
+                <div class="cyber-line social-line" style="top: calc(100% + 5rem);"></div>
+            </div>
         </section>
 
-        <!-- Skills Matrix -->
-    <section class="skills section-padding" id="skills">
-        <h2 class="section-title animate-scroll">Technical Arsenal</h2>
-        <div class="skills-grid">
-            <!-- Top Row - 3 Cards -->
-            <div class="skill-card" data-skill="html">
-                <div class="card-front">
-                    <div class="skill-icon">HTML</div>
-                    <h3 class="skill-name">HTML5</h3>
+        <section class="skills section-padding" id="skills">
+            <h2 class="section-title animate-scroll">Technical Arsenal</h2>
+            <h4 class="skill-instruction">(Hover Over To Flip)</h4>
+            <div class="skills-grid">
+                <!-- Skill cards remain unchanged from original -->
+                <div class="skill-card" data-skill="html">
+                    <div class="card-front">
+                        <div class="skill-icon">HTML</div>
+                        <h3 class="skill-name">HTML5</h3>
+                    </div>
+                    <div class="card-back">
+                        <p class="skill-desc">Semantic Markup</p>
+                        <div class="skill-progress" style="--skill-level: 95%"></div>
+                        <br>
+                        <p>- 3+ Years Experience</p>
+                        <p>- Very Comfortable</p>
+                        <p>(Best Skill/Most Used)</p>
+                    </div>
                 </div>
-                <div class="card-back">
-                    <p class="skill-desc">Semantic Markup</p>
-                    <div class="skill-progress" style="--skill-level: 95%"></div>
-                    <br>
-                    <p>- 3+ Years Experience</p>
-                    <p>- Very Comfortable</p>
-                    <p>(Best Skill/Most Used)</p>
-                </div>
-            </div>
 
-            <div class="skill-card" data-skill="css">
-                <div class="card-front">
-                    <div class="skill-icon">CSS</div>
-                    <h3 class="skill-name">CSS</h3>
+                <div class="skill-card" data-skill="css">
+                    <div class="card-front">
+                        <div class="skill-icon">CSS</div>
+                        <h3 class="skill-name">CSS</h3>
+                    </div>
+                    <div class="card-back">
+                        <p class="skill-desc">Modern Layouts</p>
+                        <div class="skill-progress" style="--skill-level: 95%"></div>
+                        <br>
+                        <p>- 3+ Years Experience</p>
+                        <p>- Very Comfortable</p>
+                        <p>(Best Skill/Most Used)</p>
+                    </div>
                 </div>
-                <div class="card-back">
-                    <p class="skill-desc">Modern Layouts</p>
-                    <div class="skill-progress" style="--skill-level: 95%"></div>
-                    <br>
-                    <p>- 3+ Years Experience</p>
-                    <p>- Very Comfortable</p>
-                    <p>(Best Skill/Most Used)</p>
-                </div>
-            </div>
 
-            <div class="skill-card" data-skill="javascript">
-                <div class="card-front">
-                    <div class="skill-icon">JS</div>
-                    <h3 class="skill-name">JavaScript</h3>
+                <div class="skill-card" data-skill="javascript">
+                    <div class="card-front">
+                        <div class="skill-icon">JS</div>
+                        <h3 class="skill-name">JavaScript</h3>
+                    </div>
+                    <div class="card-back">
+                        <p class="skill-desc">ES6+ Expertise</p>
+                        <div class="skill-progress" style="--skill-level: 80%"></div>
+                        <br>
+                        <p>- 2+ Years of Experience</p>
+                        <p>- Comfortable</p>
+                    </div>
                 </div>
-                <div class="card-back">
-                    <p class="skill-desc">ES6+ Expertise</p>
-                    <div class="skill-progress" style="--skill-level: 80%"></div>
-                    <br>
-                    <p>- 2+ Years of Experience</p>
-                    <p>- Comfortable</p>
-                </div>
-            </div>
 
-            <!-- Bottom Row - 2 Centered Cards -->
-            <div class="skill-card" data-skill="python">
-                <div class="card-front">
-                    <div class="skill-icon">PY</div>
-                    <h3 class="skill-name">Python</h3>
+                <div class="skill-card" data-skill="python">
+                    <div class="card-front">
+                        <div class="skill-icon">PY</div>
+                        <h3 class="skill-name">Python</h3>
+                    </div>
+                    <div class="card-back">
+                        <p class="skill-desc">Django & Flask</p>
+                        <div class="skill-progress" style="--skill-level: 65%"></div>
+                        <br>
+                        <p>- 1+ Year Experience</p>
+                        <p>- Learning More</p>
+                        <p>(Comfortable)</p>
+                    </div>
                 </div>
-                <div class="card-back">
-                    <p class="skill-desc">Django & Flask</p>
-                    <div class="skill-progress" style="--skill-level: 65%"></div>
-                    <br>
-                    <p>- 1+ Year Experience</p>
-                    <p>- Learning More</p>
-                    <p>(Comfortable)</p>
-                </div>
-            </div>
 
-            <div class="skill-card" data-skill="react">
-                <div class="card-front">
-                    <div class="skill-icon">⚛</div>
-                    <h3 class="skill-name">React</h3>
-                </div>
-                <div class="card-back">
-                    <p class="skill-desc">Hooks & Context API</p>
-                    <div class="skill-progress" style="--skill-level: 50%"></div>
-                    <br>
-                    <p>- 1 Year Experience</p>
-                    <p>(Learning More)</p>
+                <div class="skill-card" data-skill="react">
+                    <div class="card-front">
+                        <div class="skill-icon">⚛</div>
+                        <h3 class="skill-name">React</h3>
+                    </div>
+                    <div class="card-back">
+                        <p class="skill-desc">Hooks & Context API</p>
+                        <div class="skill-progress" style="--skill-level: 50%"></div>
+                        <br>
+                        <p>- 1 Year Experience</p>
+                        <p>(Learning More)</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-        <!-- Certificates Section -->
+        </section>
+
         <section class="certificates section-padding" id="certificates">
             <h2 class="section-title animate-scroll">Credentials</h2>
             <div class="cert-card animate-scroll">
                 <h3 class="cert-title">Web Development Certificate</h3>
-                <p class="cert-issuer">Certiciate with <a href="https://www.spcollege.edu/">St. Petersburg College</a></p>
+                <p class="cert-issuer">Certificate with <a href="https://www.spcollege.edu/">St. Petersburg College</a></p>
                 <div class="cert-date">2023</div>
             </div>
         </section>
 
-        <!-- Updated Contact Section -->
         <section class="contact section-padding" id="contact">
             <div class="contact-cta animate-scroll">
                 <h2 class="cta-title">Initiate Connection</h2>
@@ -146,9 +145,9 @@
                         >
                         <label class="cyber-label">Your Email</label>
                         <div class="error-message" id="emailError"></div>
-                      </div>
-                      
-                      <div class="input-group">
+                    </div>
+                    
+                    <div class="input-group">
                         <textarea 
                           id="messageInput" 
                           class="cyber-input" 
@@ -158,7 +157,7 @@
                         ></textarea>
                         <label class="cyber-label">Encoded Message</label>
                         <div class="error-message" id="messageError"></div>
-                      </div>
+                    </div>
                     <button class="cyber-button" type="submit" id="submitBtn">
                         <span class="cyber-text">INITIATE TRANSMISSION</span>
                         <span class="glitch-layer"></span>
@@ -170,12 +169,13 @@
         </section>
     </main>
 
-    <!-- Cyberpunk Decoration Lines -->
-    <div class="cyber-line vertical" style="left: 20%"></div>
-    <div class="cyber-line vertical" style="left: 80%"></div>
-    <div class="cyber-line horizontal" style="top: 40%"></div>
+    <div class="color-panel">
+        <button class="color-option" data-color="green">GREEN</button>
+        <button class="color-option" data-color="red">RED</button>
+        <button class="color-option" data-color="blue">BLUE</button>
+        <button class="color-option" data-color="pink">PINK</button>
+    </div>
 
-    <!-- Scripts -->
     <script src="js/three-config.js" defer></script>
     <script src="js/main.js" defer></script>
 </body>

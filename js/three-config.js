@@ -6,11 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let scene, camera, renderer, particles;
   const canvas = document.getElementById('particleCanvas');
+  const themeColors = {
+    green: 0x00ff88,
+    red: 0xFF000D,
+    blue: 0x00f0ff,
+    pink: 0xff00ff
+  };
 
-  function initParticles() {
+  function initParticles(theme = 'green') {
     scene = new THREE.Scene();
     
-    // Camera setup
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
 
@@ -23,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Particle geometry with more density
     const geometry = new THREE.BufferGeometry();
     const particleCount = 2500;
     const posArray = new Float32Array(particleCount * 3);
@@ -34,10 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-    // Particle material
     const material = new THREE.PointsMaterial({
       size: 0.06,
-      color: new THREE.Color(0x00ff88),
+      color: new THREE.Color(themeColors[theme]),
       transparent: true,
       opacity: 0.8,
       blending: THREE.AdditiveBlending,
@@ -53,13 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!particles) return;
 
-    const time = Date.now() * 0.0005; // Slower animation
+    const time = Date.now() * 0.0005;
     
-    // Autonomous floating motion
     particles.rotation.x = time * 0.1;
     particles.rotation.y = time * 0.15;
 
-    // Smooth particle position updates
     const positions = particles.geometry.attributes.position.array;
     for(let i = 0; i < positions.length; i += 3) {
       positions[i] += Math.sin(time + i) * 0.0015;
@@ -71,9 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.render(scene, camera);
   }
 
-  // Initialize
+  window.updateTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    particles.material.color.setHex(themeColors[theme]);
+    localStorage.setItem('selectedTheme', theme);
+  };
+
   try {
-    initParticles();
+    const savedTheme = localStorage.getItem('selectedTheme') || 'green';
+    initParticles(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -82,5 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     animate();
   } catch (error) {
     canvas.style.display = 'none';
+    console.error('Three.js initialization failed:', error);
   }
 });

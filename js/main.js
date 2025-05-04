@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Email validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  // Initialize EmailJS first!
-  emailjs.init('7yRLxdXAf0ljLXatW'); // Move initialization outside form handler
+  emailjs.init('7yRLxdXAf0ljLXatW');
 
-  // Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -16,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Skill Cards
   const skillCards = document.querySelectorAll('.skill-card');
   skillCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
@@ -27,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Parallax
   const floatingElements = document.querySelectorAll('.floating-element');
   const handleMouseMove = (e) => {
     const sensitivity = 0.05;
@@ -40,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('mousemove', handleMouseMove);
 
-  // Terminal Effect
   const commands = ['> INITIATE CONTACT_SEQUENCE', '> OPEN COMM_CHANNEL', '> START TRANSMISSION'];
   const cyberButton = document.querySelector('.cyber-button');
   cyberButton.addEventListener('mouseenter', () => {
@@ -48,19 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => document.body.removeAttribute('data-terminal'), 2000);
   });
 
-  // Form Submission (Updated)
   document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('submitBtn');
     const email = document.getElementById('emailInput').value;
     const message = document.getElementById('messageInput').value;
 
-    // Reset errors
     document.querySelectorAll('.error-message').forEach(el => {
       el.style.display = 'none';
     });
 
-    // Validation
     let isValid = true;
     
     if (!emailRegex.test(email)) {
@@ -81,25 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.querySelector('.progress-bar').style.width = '100%';
 
-        
-        // Send email
       const response = await emailjs.send(
-        'service_81dmn1r', // Service ID
-        'template_5qecreg', // Template ID
+        'service_81dmn1r',
+        'template_5qecreg',
         {
           from_name: email,
           from_email: email,
           message: message,
-          to_email: 'aep2cool@gmail.com' // Add this line
+          to_email: 'aep2cool@gmail.com'
         }
       );
 
-      console.log('EmailJS Response:', response); // Debug logging
-
       if (response.status === 200) {
-        submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ff88 100%)';
+        submitBtn.style.background = 'linear-gradient(45deg, var(--neon-accent) 0%, var(--neon-accent) 100%)';
         setTimeout(() => {
-          submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ffee 100%)';
+          submitBtn.style.background = 'linear-gradient(45deg, var(--neon-accent) 0%, var(--neon-accent) 100%)';
           document.getElementById('contactForm').reset();
         }, 1500);
       }
@@ -108,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       alert(`Failed to send: ${error.text || error.message}`);
       submitBtn.style.background = 'linear-gradient(45deg, #ff0033 0%, #ff0066 100%)';
       setTimeout(() => {
-        submitBtn.style.background = 'linear-gradient(45deg, #00ff88 0%, #00ffee 100%)';
+        submitBtn.style.background = 'linear-gradient(45deg, var(--neon-accent) 0%, var(--neon-accent) 100%)';
       }, 2000);
     } finally {
       submitBtn.disabled = false;
@@ -116,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Scroll Animations
   const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-scroll');
     elements.forEach(element => {
@@ -129,4 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', animateOnScroll);
   animateOnScroll();
+
+  const colorButtons = document.querySelectorAll('.color-option');
+  const savedTheme = localStorage.getItem('selectedTheme');
+  
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const activeButton = Array.from(colorButtons).find(
+      btn => btn.dataset.color === savedTheme
+    );
+    if (activeButton) activeButton.classList.add('active');
+  }
+
+  colorButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      colorButtons.forEach(btn => btn.classList.remove('active'));
+      window.updateTheme(this.dataset.color);
+      this.classList.add('active');
+    });
+  });
+
+  console.log("%c⚠ CYBER DEV MODE ACTIVATED ⚠", "color: var(--neon-accent); font-family: Orbitron; font-size: 16px;");
 });
