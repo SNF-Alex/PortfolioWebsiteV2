@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   emailjs.init('7yRLxdXAf0ljLXatW');
 
+  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Skill card hover effects
   const skillCards = document.querySelectorAll('.skill-card');
   skillCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Floating elements parallax
   const floatingElements = document.querySelectorAll('.floating-element');
   const handleMouseMove = (e) => {
     const sensitivity = 0.05;
@@ -35,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('mousemove', handleMouseMove);
 
+  // Cyber button terminal effect
   const commands = ['> INITIATE CONTACT_SEQUENCE', '> OPEN COMM_CHANNEL', '> START TRANSMISSION'];
   const cyberButton = document.querySelector('.cyber-button');
   cyberButton.addEventListener('mouseenter', () => {
@@ -42,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => document.body.removeAttribute('data-terminal'), 2000);
   });
 
+  // Contact form handling
   document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('submitBtn');
@@ -103,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Scroll animations
   const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-scroll');
     elements.forEach(element => {
@@ -116,24 +122,39 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', animateOnScroll);
   animateOnScroll();
 
+  // Color theme handling (updated for mobile)
   const colorButtons = document.querySelectorAll('.color-option');
   const savedTheme = localStorage.getItem('selectedTheme');
   
+  // Theme update function
+  window.updateTheme = (color) => {
+    document.documentElement.setAttribute('data-theme', color);
+    localStorage.setItem('selectedTheme', color);
+  };
+
+  // Initialize theme from storage
   if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    window.updateTheme(savedTheme);
     const activeButton = Array.from(colorButtons).find(
       btn => btn.dataset.color === savedTheme
     );
     if (activeButton) activeButton.classList.add('active');
   }
 
+  // Theme button handlers
   colorButtons.forEach(button => {
-    button.addEventListener('click', function() {
+    const handleThemeChange = (e) => {
+      e.preventDefault();
       colorButtons.forEach(btn => btn.classList.remove('active'));
-      window.updateTheme(this.dataset.color);
-      this.classList.add('active');
-    });
+      window.updateTheme(button.dataset.color);
+      button.classList.add('active');
+    };
+
+    // Add both mouse and touch events
+    button.addEventListener('click', handleThemeChange);
+    button.addEventListener('touchend', handleThemeChange);
   });
 
+  // Console easter egg
   console.log("%c⚠ CYBER DEV MODE ACTIVATED ⚠", "color: var(--neon-accent); font-family: Orbitron; font-size: 16px;");
 });
