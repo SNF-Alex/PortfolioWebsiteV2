@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     requestAnimationFrame(animate);
+    renderer.render(scene, camera);
     
     if (!particles) return;
 
