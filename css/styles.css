@@ -38,8 +38,8 @@ body {
   top: 0;
   left: 0;
   z-index: 0;
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   filter: brightness(1.5) contrast(150%);
 }
 
