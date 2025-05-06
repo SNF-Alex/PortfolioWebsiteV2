@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scene = new THREE.Scene();
     
-    camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
 
     renderer = new THREE.WebGLRenderer({
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     requestAnimationFrame(animate);
-    renderer.render(scene, camera);
     
     if (!particles) return;
 
