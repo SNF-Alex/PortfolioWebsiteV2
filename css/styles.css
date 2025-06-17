@@ -786,6 +786,36 @@ body {
   letter-spacing: 0.05em;
 }
 
+.cert-image-container {
+    margin: 1.5rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(var(--neon-accent-rgb), 0.3);
+    box-shadow: 0 0 15px rgba(var(--neon-accent-rgb), 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-image {
+    width: 100%;
+    height:  auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.cert-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(var(--neon-accent-rgb), 0.3);
+}
+
+/* Adjust certificate card padding */
+.cert-card {
+    padding-bottom: 1.5rem;
+}
+
 @keyframes textGlitch {
   0% { transform: translateX(0) }
   20% { transform: translateX(-2px) }
