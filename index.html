@@ -155,7 +155,7 @@
                 </a>
 
                 <a href="https://jpacontractors.com/" target="_blank" rel="noopener" class="project-card">
-                    <img src="pictures/jpa-preview.jpg" alt="JPA Contractors Website Preview" class="project-image">
+                    <img src="pictures/jpa-preview2.jpg" alt="JPA Contractors Website Preview" class="project-image">
                     <h3 class="project-title">JPA Contractors</h3>
                 </a>
             </div>
@@ -260,26 +260,5 @@
 
     <script src="js/three-config.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.project-image, .cert-image, .cyber-profile-image').forEach(function(img) {
-    img.onerror = function() {
-      // Use a local fallback image
-      if (this.src.indexOf('fallback.jpg') === -1) {
-        this.src = 'pictures/fallback.jpg';
-        this.alt = 'Image not found';
-        this.style.background = '#222';
-      } else {
-        // If fallback also fails, hide the image
-        this.style.display = 'none';
-      }
-    };
-    // Check if image is loaded
-    if (!img.complete || img.naturalWidth === 0) {
-      img.onerror();
-    }
-  });
-});
-</script>
 </body>
 </html>
