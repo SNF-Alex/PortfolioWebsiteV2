@@ -150,7 +150,7 @@
             
             <div class="projects-grid animate-scroll">
                 <a href="https://junepoint.com" target="_blank" rel="noopener" class="project-card">
-                    <img src="pictures/junepoint-preview.jpg" alt="JunePoint Website Preview" class="project-image">
+                    <img src="pictures/junepoint-preview2.jpg" alt="JunePoint Website Preview" class="project-image">
                     <h3 class="project-title">JunePoint.com</h3>
                 </a>
 
@@ -168,7 +168,7 @@
                 <p class="cert-issuer">Certificate with <a href="https://www.spcollege.edu/">St. Petersburg College</a></p>
                 
                 <div class="cert-image-container">
-                    <img src="cert.jpg" alt="Web Development Certificate" class="cert-image">
+                    <img src="pictures/Cert.jpg" alt="Web Development Certificate" class="cert-image">
                 </div>
                 
                 <div class="cert-date">2023</div>
@@ -260,22 +260,5 @@
 
     <script src="js/three-config.js" defer></script>
     <script src="js/main.js" defer></script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.project-image, .cert-image').forEach(function(img) {
-        img.onerror = function() {
-        // Fallback image or message
-        this.src = 'https://via.placeholder.com/600x400?text=Image+Not+Found';
-        this.alt = 'Image not found';
-        this.style.background = '#222';
-        };
-        // Optionally, check if image is loaded
-        if (!img.complete || img.naturalWidth === 0) {
-        img.onerror();
-        }
-    });
-    });
-    </script>
 </body>
 </html>
