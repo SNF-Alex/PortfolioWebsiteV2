@@ -260,5 +260,22 @@
 
     <script src="js/three-config.js" defer></script>
     <script src="js/main.js" defer></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.project-image, .cert-image').forEach(function(img) {
+        img.onerror = function() {
+        // Fallback image or message
+        this.src = 'https://via.placeholder.com/600x400?text=Image+Not+Found';
+        this.alt = 'Image not found';
+        this.style.background = '#222';
+        };
+        // Optionally, check if image is loaded
+        if (!img.complete || img.naturalWidth === 0) {
+        img.onerror();
+        }
+    });
+    });
+    </script>
 </body>
 </html>
